@@ -63,6 +63,7 @@ let leftButton = document.querySelector('.left-button');
 let rightButton = document.querySelector('.right-button');
 const imgCollection = Array.from(document.querySelectorAll('.carousel-container img'));
 imgCollection[0].classList.add('show');
+let previousIndex = 0;
 let currentIndex = 0;
 
 //window.addEventListener('resize', setHiddenBio);
@@ -81,18 +82,26 @@ leftButton.addEventListener('click', function(){
 rightButton.addEventListener('click', function(){
     findVisibleImg();
     
-    if(currentIndex === imgCollection.length - 1)
-        currentIndex = 0;
-    else
-        currentIndex++;
+    if(currentIndex === imgCollection.length - 1){
+      previousIndex = currentIndex;
+      currentIndex = 0;
+    }
+    else{
+      previousIndex = currentIndex;
+      currentIndex++;
+    }
+        
 
       switchImg();
 });
 
 function switchImg(){
     //if(window.innerWidth <= 500){
-      imgCollection.forEach(img =>{
-            img.classList.remove('show')
+      //showAnimation();
+      //hideAnimation();
+        
+        imgCollection.forEach(img =>{
+            img.classList.remove('show');
           });
         //})
         imgCollection[currentIndex].classList.add('show');
@@ -107,3 +116,16 @@ function findVisibleImg(){
         }
     });
 }
+
+// function showAnimation(){
+//     return new Promise((resolve, reject) => {
+//       resolve(TweenMax.to(imgCollection[currentIndex], 0, {className: '+=show'});
+//       TweenMax.to(imgCollection[currentIndex], 1, {opacity: '1', delay: '1'});
+//     });
+    
+// }
+
+// function hideAnimation(){
+//     TweenMax.to(imgCollection[previousIndex], 1, {opacity: '0'});
+//     TweenMax.to(imgCollection[previousIndex], 0, {className: '-=show', delay: '1'});
+// }
