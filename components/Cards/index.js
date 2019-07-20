@@ -17,3 +17,22 @@
 // </div>
 //
 // Create a card for each of the articles and add the card to the DOM.
+
+
+axios.get('https://lambda-times-backend.herokuapp.com/articles')
+    .then(cardData => {
+        const dataArray = Array.from(cardData.data.articles);
+        //console.log(data.data.articles);
+        //console.log('array: ', dataArray);
+    }).catch(err => {
+        console.log('error in cards: ', err);
+    });
+
+function Cards(cardValue){
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    const author = document.createElement('div');
+    author.classList.add('headline');
+    author.textContent = cardValue.headline;
+}
